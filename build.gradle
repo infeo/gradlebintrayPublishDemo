@@ -35,8 +35,9 @@ dependencies {
 }
 
 bintray{
-	user = System.getenv('BINTRAY_USER')
-	key = System.getenv('BINTRAY_KEY')
+	user = bintrayUser
+	key = bintrayApiKey
+	publications = ['mavenPublication']
 	pkg {
 		version {
 			name = project.name
@@ -75,6 +76,15 @@ task sourcesJar(type: Jar) {
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc.destinationDir
+}
+
+task showBintrayInfo() {
+	description 'Shows your system bintray credentials'
+	group 'bintray'
+	doLast() {
+		println bintrayUser
+		print bintrayApiKey
+	}
 }
 
 //create pomConfig
